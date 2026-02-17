@@ -8,7 +8,7 @@ No installation. No game engine. Runs entirely on the web.
 ---
 
 ## 🌐 Live Demo
-🔗 https://Shree-svg.github.io/virtual-museum/
+[🔗https://shree-svg.github.io/Neural_Nexus-Virtual_3D_Museum/
 
 
 ---
