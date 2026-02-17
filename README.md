@@ -8,9 +8,8 @@ No installation. No game engine. Runs entirely on the web.
 ---
 
 ## 🌐 Live Demo
-🔗 https://YOUR-USERNAME.github.io/virtual-museum/
+🔗 https://Shree-svg.github.io/virtual-museum/
 
-*(Replace YOUR-USERNAME with your GitHub username after deployment)*
 
 ---
 
