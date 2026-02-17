@@ -1,3 +1,123 @@
+<!--
+===========================================================
+            VIRTUAL 3D MUSEUM — PROJECT DOCUMENTATION
+===========================================================
+
+Project Description:
+This project is a browser-based interactive 3D Virtual Museum
+built using A-Frame (WebXR framework based on Three.js).
+Users can walk inside the gallery and view paintings in real-time
+without installing any software.
+
+Technology Used:
+- HTML
+- A-Frame (3D Web Framework)
+- WebGL Rendering
+- Entity Component System (ECS)
+- Real-time lighting & fog effects
+
+-----------------------------------------------------------
+HOW THE SYSTEM WORKS
+-----------------------------------------------------------
+
+1. <a-scene>
+The scene acts as the 3D world container.
+All objects, lights, and camera exist inside this environment.
+
+Fog is applied to simulate atmospheric depth so distant
+objects fade out like real game engines (Unreal/Unity).
+
+-----------------------------------------------------------
+
+2. <a-assets>  (Texture Preloading System)
+All images are loaded before rendering to avoid lag or
+texture popping while walking in the museum.
+
+Example:
+<img id="art1" src="assets/art1.jpg">
+
+Assets are referenced later using:
+src="#art1"
+
+-----------------------------------------------------------
+
+3. Museum Structure
+
+Floor:
+A plane rotated -90° becomes the ground.
+
+Walls:
+Box geometries form the closed room environment.
+
+Ceiling:
+Top plane covering the museum hall.
+
+-----------------------------------------------------------
+
+4. Paintings (Core Feature)
+
+Paintings are created using textured planes.
+Images are mapped onto flat surfaces using UV texture mapping.
+
+<a-plane src="#art1" position="-6 3 -13.7" width="4" height="3">
+
+This is efficient because 3D models are not required.
+
+-----------------------------------------------------------
+
+5. Lighting System (Realism)
+
+Ambient Light:
+Provides overall base visibility.
+
+Spot Lights:
+Highlight paintings like real museum gallery lighting.
+
+Point Lights:
+Used in lamps to simulate bulb glow.
+
+Lighting creates shadows and depth perception.
+
+-----------------------------------------------------------
+
+6. Camera & Navigation
+
+<a-camera wasd-controls look-controls>
+
+WASD Keys  → Move player
+Mouse      → Look around
+
+The camera acts as the visitor inside the museum.
+
+-----------------------------------------------------------
+
+7. Fog Effect (Cinematic Rendering)
+
+Fog reduces visibility with distance.
+Benefits:
+- Creates cinematic depth
+- Improves performance
+- Simulates real environment atmosphere
+
+-----------------------------------------------------------
+
+RENDERING PIPELINE
+
+User Input → Camera Movement → A-Frame Components →
+Three.js → WebGL → GPU → Screen (60 FPS)
+
+The browser performs real-time rendering similar to a game engine.
+
+-----------------------------------------------------------
+
+SUMMARY
+
+This project demonstrates how WebXR can be used to build
+a real-time interactive 3D environment using only web
+technologies without external game engines.
+
+===========================================================
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +127,24 @@
 </head>
 
 <body>
+<script>
+AFRAME.registerComponent('mouse-zoom', {
+  init: function () {
+    const cam = this.el.getObject3D('camera');
 
+    window.addEventListener('wheel', (e) => {
+      if (!cam) return;
+
+      cam.fov += e.deltaY * 0.03;
+
+      // limit zoom range (important)
+      cam.fov = Math.max(25, Math.min(90, cam.fov));
+
+      cam.updateProjectionMatrix();
+    });
+  }
+});
+</script>
 <a-scene
   background="color: #0E1117"
   fog="type: exponential; color: #cfc7b8; density: 0.035">
@@ -137,9 +274,9 @@
 </a-light>
 
   <!-- CAMERA -->
-  <a-entity position="0 1.6 12">
-    <a-camera wasd-controls look-controls="pointerLockEnabled: true"></a-camera>
-  </a-entity>
+ <a-entity position="0 1.6 10">
+  <a-camera wasd-controls="fly: false; acceleration: 35" look-controls mouse-zoom></a-camera>
+</a-entity>
 
 </a-scene>
 </body>
