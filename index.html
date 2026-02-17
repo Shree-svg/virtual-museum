@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>History Virtual Museum</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+
+<body>
+
+<a-scene
+  background="color: #0E1117"
+  fog="type: exponential; color: #cfc7b8; density: 0.035">
+
+<a-sky color="#c9b79c"></a-sky>
+
+  <!-- ================= ASSETS (LOCAL FILES) ================= -->
+  <a-assets timeout="10000">
+  <img id="h1" src="./assets/art1.jpg">
+  <img id="h2" src="./assets/art2.jpg">
+  <img id="h3" src="./assets/art3.jpg">
+  <img id="h4" src="./assets/art4.jpg">
+  <img id="h5" src="./assets/art5.jpg">
+  <img id="h6" src="./assets/art6.jpg">
+  <img id="h7" src="./assets/art7.jpg">
+</a-assets>
+<!-- FRONT WALL SPOTS -->
+<a-light type="spot" position="-6 5 -12" angle="22" intensity="1.6" color="#ffe9c6"></a-light>
+<a-light type="spot" position="0 5 -12"  angle="22" intensity="1.6" color="#ffe9c6"></a-light>
+<a-light type="spot" position="6 5 -12"  angle="22" intensity="1.6" color="#ffe9c6"></a-light>
+
+<!-- LEFT WALL -->
+<a-light type="spot" position="-12 5 -5" angle="22" intensity="1.4" color="#ffe9c6"></a-light>
+<a-light type="spot" position="-12 5 5"  angle="22" intensity="1.4" color="#ffe9c6"></a-light>
+
+<!-- RIGHT WALL -->
+<a-light type="spot" position="12 5 -5" angle="22" intensity="1.4" color="#ffe9c6"></a-light>
+<a-light type="spot" position="12 5 5"  angle="22" intensity="1.4" color="#ffe9c6"></a-light>
+  <!-- FLOOR -->
+  <a-plane position="0 0 0" rotation="-90 0 0" width="30" height="30" color="#8B0000"></a-plane>
+
+  <!-- CEILING -->
+  <a-plane position="0 6 0" rotation="90 0 0" width="30" height="30" color="#2c2c2c"></a-plane>
+
+  <!-- WALLS -->
+  <a-box position="0 3 -14" width="28" height="6" depth="0.5" color="#111111"></a-box>
+  <a-box position="-14 3 0" width="0.5" height="6" depth="28" color="#1a1a1a"></a-box>
+  <a-box position="14 3 0" width="0.5" height="6" depth="28" color="#1a1a1a"></a-box>
+
+  <!-- FRONT WALL (3) -->
+  <a-plane src="#h1" position="-6 3 -13.7" width="4.5" height="3.2"></a-plane>
+  <a-plane src="#h2" position="0 3 -13.7"  width="4.5" height="3.2"></a-plane>
+  <a-plane src="#h3" position="6 3 -13.7"  width="4.5" height="3.2"></a-plane>
+
+  <!-- LEFT WALL (2) -->
+  <a-plane src="#h4" position="-13.7 3 -5" rotation="0 90 0" width="4.5" height="3.2"></a-plane>
+  <a-plane src="#h5" position="-13.7 3 5"  rotation="0 90 0" width="4.5" height="3.2"></a-plane>
+
+  <!-- RIGHT WALL (2) -->
+  <a-plane src="#h6" position="13.7 3 -5" rotation="0 -90 0" width="4.5" height="3.2"></a-plane>
+  <a-plane src="#h7" position="13.7 3 5"  rotation="0 -90 0" width="4.5" height="3.2"></a-plane>
+
+  <!-- CENTER DISPLAY -->
+  <a-cylinder position="0 0.75 0" radius="1.2" height="0.5" color="#5D4037"></a-cylinder>
+
+  <a-cylinder position="0 2 0" radius="0.9" height="2.5"
+              color="#FFFFFF" opacity="0.15"></a-cylinder>
+
+  <a-torus position="0 1.6 0"
+           radius="0.5"
+           radius-tubular="0.1"
+           color="#FFD700"
+           rotation="90 0 0"
+           animation="property: rotation; to: 90 360 0; loop: true; dur: 8000">
+  </a-torus>
+
+  <a-sphere position="0 1.9 0" radius="0.15" color="#00FFFF"></a-sphere>
+
+  <!-- CORNER LAMPS -->
+  <a-entity position="-12 0.2 -12">
+    <a-cylinder radius="0.1" height="1.5" color="#444"></a-cylinder>
+    <a-sphere position="0 0.9 0" radius="0.25" color="#fffacd"
+              light="type: point; intensity: 1.2; distance: 10"></a-sphere>
+  </a-entity>
+
+  <a-entity position="12 0.2 -12">
+    <a-cylinder radius="0.1" height="1.5" color="#444"></a-cylinder>
+    <a-sphere position="0 0.9 0" radius="0.25"
+              light="type: point; intensity: 1.2; distance: 10"></a-sphere>
+  </a-entity>
+
+  <a-entity position="-12 0.2 12">
+    <a-cylinder radius="0.1" height="1.5" color="#444"></a-cylinder>
+    <a-sphere position="0 0.9 0" radius="0.25"
+              light="type: point; intensity: 1.2; distance: 10"></a-sphere>
+  </a-entity>
+
+  <a-entity position="12 0.2 12">
+    <a-cylinder radius="0.1" height="1.5" color="#444"></a-cylinder>
+    <a-sphere position="0 0.9 0" radius="0.25"
+              light="type: point; intensity: 1.2; distance: 10"></a-sphere>
+  </a-entity>
+
+  <!-- LIGHTING -->
+  <!-- GLOBAL AMBIENT BOUNCE -->
+<a-light type="ambient" intensity="0.25" color="#ffffff"></a-light>
+
+<!-- WARM CEILING KEY LIGHT (main cinematic source) -->
+<a-light type="directional"
+         position="0 8 4"
+         intensity="1.2"
+         color="#ffe2b8">
+</a-light>
+
+<!-- COOL FILL LIGHT (adds realism contrast) -->
+<a-light type="directional"
+         position="-6 6 -4"
+         intensity="0.5"
+         color="#bcd7ff">
+</a-light>
+
+<!-- SOFT HEMISPHERE SKY LIGHT -->
+<a-light type="hemisphere"
+         color="#fff4d6"
+         groundColor="#9c8b6b"
+         intensity="0.55">
+</a-light>
+
+<!-- CENTER ARTIFACT SPOTLIGHT -->
+<a-light type="spot"
+         position="0 6 0"
+         angle="28"
+         intensity="2.3"
+         penumbra="0.45"
+         color="#ffe6c4"
+         target="#jewel">
+</a-light>
+
+  <!-- CAMERA -->
+  <a-entity position="0 1.6 12">
+    <a-camera wasd-controls look-controls="pointerLockEnabled: true"></a-camera>
+  </a-entity>
+
+</a-scene>
+</body>
+</html>
